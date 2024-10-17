@@ -49,13 +49,26 @@
 </head>
 <body>
     <div class="container">
-        <h2>FEFAS BOLADÃO DA TROPA DOS CORINGA DO FLAMENGO</h2>
+        <h2>CRIPTOGRAFIA</h2>
         <form>
             <label for="textoNormal">Coloque o texto normal:</label>
             <input type="text" id="textoNormal" required>
-            <button type="button" onclick="decifrar()">Codificar</button>
+            <label for="chave">Coloque a palavra chave:</label>
+            <input type="text" id="chave" required>
+            <button type="button" onclick="criptografaExecuta()">Codificar</button>
         </form>
         <div id="resultado"></div>
+    </div>
+    
+    <div class="container">
+        <h2>DESCRIPTOGRAFIA API</h2>
+        <form>
+            <label for="textoCodificado">Coloque o texto criptografado:</label>
+            <input type="text" id="textoCodificado" required>
+            <label for="chave2">Coloque a palavra chave:</label>
+            <input type="text" id="chave2" required>
+            <button type="button" onclick="descriptografaExecuta()">decodificar</button>
+        </form>
         <div id="respostaPost"></div>
     </div>
 
@@ -100,13 +113,19 @@
             return textoCodificado;
         }
 
-        //executa
-        async function decifrar() {
+        //executa o codificar
+        async function criptografaExecuta() {
             const texto = document.getElementById("textoNormal").value.toLowerCase();
-            const chave = "tarkovsky";
+            const chave = document.getElementById("chave").value.toLowerCase();
             const textoCodificado = criptografa(texto, chave);
-            const respostaDaApi = await descriptografaComApi(textoCodificado, chave);
             document.getElementById("resultado").innerText = "Texto codificado: " + textoCodificado;
+        }
+        async function descriptografaExecuta() {
+            const textoCodificado = document.getElementById("textoCodificado").value.toLowerCase();
+            console.log(textoCodificado);
+            const chave2 = document.getElementById("chave2").value.toLowerCase();
+            console.log(chave2);
+            const respostaDaApi = await descriptografaComApi(textoCodificado, chave2);
             document.getElementById("respostaPost").innerText = "Texto decifrado pela API: " + respostaDaApi;
         }
     </script>
