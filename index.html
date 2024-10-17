@@ -4,48 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vigenère FLAMENGUISTA</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            align-items: center;
-            align-self: center;
-            align-content: center;
-        }
-        .container {
-            background-color: #fff;
-            padding: 3rem;
-            border-radius: 1rem;
-            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: auto;
-        }
-        input, button {
-            margin: 5px 0;
-            padding: 10px;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #resultado {
-            margin-top: 20px;
-            font-weight: bold;
-            text-align: center;
-        }
-        #respostaPost {
-            margin-top: 20px;
-            font-weight: bold;
-            text-align: center;
-        }
-    </style>
+    <link rel="icon" href="./icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <div class="container">
@@ -55,7 +15,7 @@
             <input type="text" id="textoNormal" required>
             <label for="chave">Coloque a palavra chave:</label>
             <input type="text" id="chave" required>
-            <button type="button" onclick="criptografaExecuta()">Codificar</button>
+            <button type="button" onclick="criptografaExecuta()">sou flamenguista e quero Criptografar</button>
         </form>
         <div id="resultado"></div>
     </div>
@@ -67,67 +27,10 @@
             <input type="text" id="textoCodificado" required>
             <label for="chave2">Coloque a palavra chave:</label>
             <input type="text" id="chave2" required>
-            <button type="button" onclick="descriptografaExecuta()">decodificar</button>
+            <button type="button" onclick="descriptografaExecuta()"> sou flamenguista e quero Descriptografar</button>
         </form>
         <div id="respostaPost"></div>
     </div>
-
-    <script>
-        //envia metodo post para api descriptografar
-        async function descriptografaComApi(textoCodificado, chave) {
-            const response = await fetch("https://desafio9.onrender.com/decrypt_message", {
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        keyword: chave,
-                        encrypted_message: textoCodificado
-                    }),
-                    method: "POST",
-                    mode: "cors"
-                });
-            const retornoJson = await response.json();
-            console.log(retornoJson);
-
-            if (retornoJson['decrypted_message']) {
-                return retornoJson['decrypted_message'];
-            } else {
-                return retornoJson['error'];
-            }
-        }
-        
-        //função que criptografa
-        function criptografa(texto, chave){
-            const tamanhoAlfabeto = 26;
-            const aCharCode = 'a'.charCodeAt(0);
-            let textoCodificado = '';
-            while (chave.length < texto.length) {
-            chave += chave; 
-            }
-            for (let i=0; i< texto.length;i++){
-                let textoChar = texto.charCodeAt(i) - aCharCode;
-                let chaveChar = chave.charCodeAt(i) - aCharCode;
-                let codificadoChar = (textoChar + chaveChar) % tamanhoAlfabeto;
-                textoCodificado = textoCodificado + String.fromCharCode(codificadoChar + aCharCode);
-            }
-            return textoCodificado;
-        }
-
-        //executa o codificar
-        async function criptografaExecuta() {
-            const texto = document.getElementById("textoNormal").value.toLowerCase();
-            const chave = document.getElementById("chave").value.toLowerCase();
-            const textoCodificado = criptografa(texto, chave);
-            document.getElementById("resultado").innerText = "Texto codificado: " + textoCodificado;
-        }
-        async function descriptografaExecuta() {
-            const textoCodificado = document.getElementById("textoCodificado").value.toLowerCase();
-            console.log(textoCodificado);
-            const chave2 = document.getElementById("chave2").value.toLowerCase();
-            console.log(chave2);
-            const respostaDaApi = await descriptografaComApi(textoCodificado, chave2);
-            document.getElementById("respostaPost").innerText = "Texto decifrado pela API: " + respostaDaApi;
-        }
-    </script>
+    <script src="./cifra.js" defer></script>
 </body>
 </html>

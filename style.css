@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    height: 100vh;
+    background-image: url('./Design\ sem\ nome\ \(7\).png');
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+}
+.container {
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: auto;
+}
+input, button {
+    margin: 5px 0;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+button {
+    background-color: #e70909;
+    color: white;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #000000;
+}
+#resultado {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+#respostaPost {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+@media (min-width: 1440px){
+    body{
+        display: flex;
+        }
+}
